@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project
+results/
+datasets/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.xml
+*.bin
+uv.lock
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+lightning_logs/

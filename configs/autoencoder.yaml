@@ -1,0 +1,31 @@
+# Custom Convolutional Autoencoder Configuration
+# One-class learning: train on normal images, detect anomalies via reconstruction error
+
+model:
+  name: "custom_autoencoder"
+  in_channels: 3
+  latent_dim: 128                   # Bottleneck size
+  encoder_channels: [32, 64, 128, 256]   # Progressive channel increase
+  decoder_channels: [256, 128, 64, 32]   # Mirror of encoder
+  use_ssim_loss: true               # Combine MSE + SSIM for perceptual quality
+  ssim_weight: 0.5                  # Weight for SSIM component
+
+data:
+  category: "bottle"
+  image_size: [256, 256]
+  train_batch_size: 16
+  eval_batch_size: 16
+  num_workers: 4
+
+training:
+  lr: 0.001
+  weight_decay: 0.00001
+  epochs: 100
+  scheduler: "cosine"               # CosineAnnealingLR
+  patience: 15                      # Early stopping patience
+
+threshold:
+  method: "gaussian"                # Fit Gaussian to normal errors
+  k_sigma: 3.0                     # Threshold = mean + k * std
+
+results_dir: "./results"

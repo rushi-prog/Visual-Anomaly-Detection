@@ -1,0 +1,26 @@
+# PatchCore Configuration
+# Memory-bank approach: stores representative patch features from a pretrained CNN
+# Detects anomalies via nearest-neighbor distance in feature space
+
+model:
+  name: "Patchcore"
+  backbone: "wide_resnet50_2"       # Strong feature extractor
+  layers:                            # Multi-scale feature extraction
+    - "layer2"
+    - "layer3"
+  coreset_sampling_ratio: 0.1       # Fraction of patches to keep in memory bank
+  num_neighbors: 9                   # k-NN for anomaly scoring
+
+data:
+  category: "bottle"                 # MVTec AD category
+  image_size: [256, 256]            # Input resolution
+  train_batch_size: 32
+  eval_batch_size: 32
+  num_workers: 4
+
+trainer:
+  max_epochs: 1                      # PatchCore is single-pass (no gradient training)
+  accelerator: "auto"               # auto-detect GPU/CPU
+  devices: 1
+
+results_dir: "./results"

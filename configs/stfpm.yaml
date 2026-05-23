@@ -1,0 +1,25 @@
+# STFPM Configuration
+# Student-Teacher Feature Pyramid Matching
+# Fast inference with multi-scale feature comparison
+
+model:
+  name: "Stfpm"
+  backbone: "resnet18"              # Lightweight backbone for speed
+  layers:
+    - "layer1"
+    - "layer2"
+    - "layer3"
+
+data:
+  category: "bottle"
+  image_size: [256, 256]
+  train_batch_size: 32
+  eval_batch_size: 32
+  num_workers: 4
+
+trainer:
+  max_epochs: 100
+  accelerator: "auto"
+  devices: 1
+
+results_dir: "./results"
